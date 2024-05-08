@@ -22,6 +22,84 @@
 <body>
     <!-- Start Header -->
     <header>
+        <div class="fixed-button">
+            <button id="openOptions">
+                <i class="fa fa-share"></i>
+            </button>
+            <div class="options">
+                <button id="whatsappBtn" onclick="whatsappbtn()">WhatsApp</button>
+                <button id="vcfBtn" onclick="downloadVCF()">Download VCF</button>
+                <button id="qrCodeBtn" onclick="generateQRCode()">QR Code</button>
+            </div>
+        </div>
+        <style>
+            .fixed-button {
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                z-index: 10;
+            }
+
+            .fixed-button button {
+                padding: 10px 20px;
+                background-color: #FF136F;
+                color: white;
+                border: none;
+                cursor: pointer;
+                border-radius: 50%;
+            }
+
+            .options {
+                display: none;
+                position: absolute;
+                background-color: #f9f9f9;
+                min-width: 160px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+                top: -175px;
+                left: -100px;
+            }
+
+            .options button {
+                display: block;
+                width: 100%;
+                padding: 10px 20px;
+                text-align: left;
+                border: none;
+                border-radius: 0;
+                background-color: #FF136F;
+                cursor: pointer;
+            }
+
+            .options button:hover {
+                background-color: #ddd;
+            }
+        </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var openBtn = document.getElementById('openOptions');
+                var optionsDiv = document.querySelector('.options');
+                var whatsappBtn = document.getElementById('whatsappBtn');
+                var vcfBtn = document.getElementById('vcfBtn');
+                var qrCodeBtn = document.getElementById('qrCodeBtn');
+
+                openBtn.addEventListener('click', function () {
+                    optionsDiv.style.display = (optionsDiv.style.display === 'block') ? 'none' : 'block';
+                });
+
+                whatsappBtn.addEventListener('click', function () {
+                    window.open('https://wa.me/?text=Your%20Message%20Here');
+                });
+
+                vcfBtn.addEventListener('click', function () {
+                    window.location.href = 'path_to_your_vcf_file.vcf';
+                });
+
+                qrCodeBtn.addEventListener('click', function () {
+                });
+            });
+
+        </script>
         <!-- NavBar Added -->
         <nav class="navbar navbar-expand-lg py-4">
             <div class="container">
@@ -96,11 +174,13 @@
                                     .links span {
                                         color: black;
                                     }
-                                    .ps{
+
+                                    .ps {
                                         padding-left: 3rem;
                                     }
+
                                     @media only screen and (max-width: 728px) {
-                                        .ps{
+                                        .ps {
                                             padding-left: 0;
                                             text-align: center;
                                         }
@@ -110,9 +190,13 @@
                             <div class="col-lg-4 order-1 order-md-2 order-lg-2" style="margin: auto;">
                                 <div id="carouselExampleIndicators1" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-indicators">
-                                        <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                                        <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                                        <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                        <button type="button" data-bs-target="#carouselExampleIndicators1"
+                                            data-bs-slide-to="0" class="active" aria-current="true"
+                                            aria-label="Slide 1"></button>
+                                        <button type="button" data-bs-target="#carouselExampleIndicators1"
+                                            data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                        <button type="button" data-bs-target="#carouselExampleIndicators1"
+                                            data-bs-slide-to="2" aria-label="Slide 3"></button>
                                     </div>
                                     <div class="carousel-inner rounded-3">
                                         <div class="carousel-item active">
@@ -126,7 +210,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -220,65 +304,7 @@
                     </div>
                     <div class="col">
                         <div class="card border-0 rounded-3 h-100">
-                            <img src="images/4.png" class="card-img-top" alt="...">
-                            <div class="card-body text-center">
-                                <h5 class="card-title fw-semibold">Decorative Dolls</h5>
-                                <p class="card-text mt-4">Classic handcrafted moccasins crafted with precision and care.
-                                    Made from premium materials for superior comfort and durability.</p>
-                                <h5 class="price fw-semibold">₹350</h5>
-                            </div>
-                            <div class="mb-4 d-flex justify-content-around">
-                                <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
-                                        class="fa fa-whatsapp"></i>Whatsapp</button>
-                                <button type="button" class="btn-buy-now" onclick="call()"><i
-                                        class="fa fa-phone"></i>Call</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section id="shoes" class="container">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="fw-semibold mb-3">Metal Crafts</h2>
-                </div>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                    <div class="col">
-                        <div class="card border-0 rounded-3 h-100">
-                            <img src="images/1.png" class="card-img-top" alt="...">
-                            <div class="card-body text-center">
-                                <h5 class="card-title fw-semibold">Decorative Tea Pot</h5>
-                                <p class="card-text mt-4">Handcrafted leather boots designed for durability and style.
-                                    Each pair is meticulously crafted by skilled artisans.</p>
-                                <h5 class="price fw-semibold">₹120</h5>
-                            </div>
-                            <div class="mb-4 d-flex justify-content-around">
-                                <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
-                                        class="fa fa-whatsapp"></i>Whatsapp</button>
-                                <button type="button" class="btn-buy-now" onclick="call()"><i
-                                        class="fa fa-phone"></i>Call</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card border-0 rounded-3 h-100">
-                            <img src="images/2.png" class="card-img-top" alt="...">
-                            <div class="card-body text-center">
-                                <h5 class="card-title fw-semibold">Decorative Vase</h5>
-                                <p class="card-text mt-4">Comfortable and stylish handwoven sandals, perfect for casual
-                                    wear. Made with natural materials by skilled artisans.</p>
-                                <h5 class="price fw-semibold">₹320</h5>
-                            </div>
-                            <div class="mb-4 d-flex justify-content-around">
-                                <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
-                                        class="fa fa-whatsapp"></i>Whatsapp</button>
-                                <button type="button" class="btn-buy-now" onclick="call()"><i
-                                        class="fa fa-phone"></i>Call</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card border-0 rounded-3 h-100">
-                            <img src="images/4.png" class="card-img-top" alt="...">
+                            <img src="images/3.png" class="card-img-top" alt="...">
                             <div class="card-body text-center">
                                 <h5 class="card-title fw-semibold">Decorative Dolls</h5>
                                 <p class="card-text mt-4">Classic handcrafted moccasins crafted with precision and care.
@@ -302,7 +328,7 @@
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                     <div class="col">
                         <div class="card border-0 rounded-3 h-100">
-                            <img src="images/3.png" class="card-img-top" alt="...">
+                            <img src="images/4.png" class="card-img-top" alt="...">
                             <div class="card-body text-center">
                                 <h5 class="card-title fw-semibold">Bamboo Tray</h5>
                                 <p class="card-text mt-4">Handcrafted woven backpack made from natural fibers, perfect
@@ -540,7 +566,7 @@
             <!-- Carousel wrapper -->
         </section>
         <section id="subscribe" class="container my-5 rounded-3 d-flex justify-content-center align-items-center">
-            <div class="container" id="contact"> 
+            <div class="container" id="contact">
                 <div class="row align-items-stretch no-gutters contact-wrap">
                     <div class="col-md-8">
                         <div class="form h-100">
@@ -597,22 +623,24 @@
                     </div>
                     <div class="col-md-4">
                         <div class="contact-info h-100">
-                            <h3>Payment</h3>
+                            <h2>Payment</h2>
                             <!-- <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, magnam!</p> -->
-                            <ul class="list-unstyled">
+                            <ul class="list-unstyled" style="border-bottom: 1px solid black;">
                                 <li class="d-flex">
-                                    <span class="text">Phonepe</span>
+                                    <span class="text"><a href="phonepe://send?phone=7412846037">Phonepe</a></span>
                                 </li>
                                 <li class="d-flex">
-                                    <span class="text">Paytm</span>
-                                </li>
-                                <li class="d-flex">
-                                    <span class="text">Googlepay</span>
+                                    <span class="text"><a href="paytm://pay?pn=7412846037">Paytm</a></span>
                                 </li>
                             </ul>
-                            <h3>Reach out</h3>
+                            <style>
+                                span a {
+                                    color: black;
+                                }
+                            </style>
+                            <h2>Reach out</h2>
                             <!-- <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, magnam!</p> -->
-                            <ul class="list-unstyled">
+                            <ul class="list-unstyled" style="border-bottom: 1px solid black;">
                                 <li class="d-flex">
                                     <span class="fa fa-location mx-2 my-2"></span>
                                     <span class="text">Jaipur</span>
@@ -626,9 +654,9 @@
                                     <span class="text">hello@khojorightnow.com</span>
                                 </li>
                             </ul>
-                            <h3>Social Media</h3>
+                            <h2>Social Media</h2>
                             <!-- <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, magnam!</p> -->
-                            <ul class="list-unstyled">
+                            <ul class="list-unstyled" style="border-bottom: 1px solid black;">
                                 <li class="d-flex">
                                     <span class="fa fa-whatsapp mx-2 my-2"></span>
                                     <span class="text">Whatsapp</span>
@@ -694,6 +722,7 @@
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
 
+
     <script>
         function call() {
             window.location.href = 'tel:7412846037';
@@ -705,6 +734,69 @@
             var whatsappUrl = 'https://api.whatsapp.com/send?phone=' + phoneNumber + '&text=' + message;
             window.open(whatsappUrl, '_blank');
         }
+        function whatsappbtn() {
+            var name = "Kritikala";
+            var phoneNumber = "7412846037";
+            var email = "hello@khojorightnow.com";
+            var websiteLink = window.location.href;
+            var message = encodeURIComponent(
+                'Hi,\n\n' +
+                name + '\n' +
+                phoneNumber + '\n' +
+                email + '\n' +
+                websiteLink
+            );
+            var whatsappUrl = 'https://api.whatsapp.com/send?phone=' + phoneNumber + '&text=' + message;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        function downloadVCF() {
+            var phoneNumber = '7412846037';
+            var name = 'kritikala';
+            var email = 'hello@khojorightnow.com';
+            var vcardContent = 'BEGIN:VCARD\n' +
+                'VERSION:3.0\n' +
+                'FN:' + name + '\n' +
+                'TEL:' + phoneNumber + '\n' +
+                'EMAIL:' + email + '\n' +
+                'END:VCARD';
+
+            var blob = new Blob([vcardContent], { type: 'text/vcard' });
+            var downloadLink = document.createElement('a');
+
+            downloadLink.href = window.URL.createObjectURL(blob);
+            downloadLink.download = 'contact.vcf';
+
+            downloadLink.setAttribute('target', '_blank');
+
+            document.body.appendChild(downloadLink);
+
+            downloadLink.click();
+
+            document.body.removeChild(downloadLink);
+        }
+
+
+    </script>
+    <div id="qrcode" style="display: none;"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@latest"></script>
+    <script>
+        function generateQRCode() {
+    var currentURL = window.location.href;
+    var qrcode = new QRCode("qrcode");
+    qrcode.makeCode(currentURL);
+
+    var qrImage = document.getElementById("qrcode").getElementsByTagName('img')[0];
+    qrImage.onload = function() {
+        var downloadLink = document.createElement('a');
+        downloadLink.href = qrImage.src;
+        downloadLink.download = 'qrcode.png';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    };
+}
 
     </script>
 </body>

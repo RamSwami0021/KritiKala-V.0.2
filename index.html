@@ -27,7 +27,7 @@
                 <i class="fa fa-share"></i>
             </button>
             <div class="options">
-                <button id="whatsappBtn" onclick="shareOnClick()">Share</button>
+                <button onclick="shareOnClick()">Share</button>
                 <button id="vcfBtn" onclick="downloadVCF()">Save Contact</button>
                 <button id="qrCodeBtn" onclick="generateQRCode()">QR</button>
             </div>
@@ -792,20 +792,20 @@
         }
 
         function generateQRCode() {
-    alert("Work");
+            alert("Work");
 
-    var currentURL = window.location.href;
-    console.log("Current URL: " + currentURL);
+            var currentURL = window.location.href;
+            console.log("Current URL: " + currentURL);
 
-    var qrcode = new QRCode("qrcode");
-    console.log("QRCode instance created");
+            var qrcode = new QRCode("qrcode");
+            console.log("QRCode instance created");
 
-    qrcode.makeCode(currentURL);
-    console.log("QRCode generated");
+            qrcode.makeCode(currentURL);
+            console.log("QRCode generated");
 
-    // Call openModal directly after generating QR code
-    openModal();
-}
+            // Call openModal directly after generating QR code
+            openModal();
+        }
 
 
         // Attach click event to Save Image button
@@ -864,45 +864,43 @@
         }
 
         function shareMobile() {
-    if (navigator.share) {
-        var qrImage = document.getElementById("qrcode").getElementsByTagName('img')[0];
+            if (navigator.share) {
+                var qrImage = document.getElementById("qrcode").getElementsByTagName('img')[0];
 
-        if (qrImage) {
-            if (qrImage.complete) {
-                shareWithQRImage(qrImage.src);
+                if (qrImage) {
+                    if (qrImage.complete) {
+                        shareWithQRImage(qrImage.src);
+                    } else {
+                        shareWithQRImage(qrImage.src);
+                    }
+                } else {
+                    shareWithoutQRImage();
+                }
             } else {
-                qrImage.addEventListener('load', function () {
-                    shareWithQRImage(qrImage.src);
-                });
+                alert('Share functionality is not supported on your device.');
             }
-        } else {
-            shareWithoutQRImage();
         }
-    } else {
-        alert('Share functionality is not supported on your device.');
-    }
-}
 
-function shareWithQRImage(imageSrc) {
-    navigator.share({
-        title: 'KritiKala',
-        text: 'Kritikala',
-        url: window.location.href,
-        files: [imageSrc]
-    })
-    .then(() => console.log('Successful share'))
-    .catch((error) => console.log('Error sharing', error));
-}
+        function shareWithQRImage(imageSrc) {
+            navigator.share({
+                title: 'KritiKala',
+                text: 'Kritikala',
+                url: window.location.href,
+                files: [imageSrc]
+            })
+                .then(() => console.log('Successful share'))
+                .catch((error) => console.log('Error sharing', error));
+        }
 
-function shareWithoutQRImage() {
-    navigator.share({
-        title: 'KritiKala',
-        text: 'Kritikala',
-        url: window.location.href
-    })
-    .then(() => console.log('Successful share'))
-    .catch((error) => console.log('Error sharing', error));
-}
+        function shareWithoutQRImage() {
+            navigator.share({
+                title: 'KritiKala',
+                text: 'Kritikala',
+                url: window.location.href
+            })
+                .then(() => console.log('Successful share'))
+                .catch((error) => console.log('Error sharing', error));
+        }
 
 
     </script>

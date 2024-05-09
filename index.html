@@ -843,7 +843,7 @@
             var modal = document.getElementById("myModal");
             modal.style.display = "none";
         }
-
+function generateQRCode() {
         console.log("Function started");
     alert("Work"); // Check if this alert appears
 
@@ -865,7 +865,7 @@
     };
 
     console.log("Function finished");
-
+}
         // Attach click event to Save Image button
         document.getElementById("saveBtn").addEventListener("click", function () {
             var qrImage = document.getElementById("qrcode").getElementsByTagName('img')[0];

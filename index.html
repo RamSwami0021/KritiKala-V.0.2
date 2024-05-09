@@ -849,9 +849,12 @@
             var currentURL = window.location.href;
             alert(currentURL)
             var qrcode = new QRCode("qrcode");
+            alert(qrcode)
             qrcode.makeCode(currentURL);
+            alert(qrcode)
 
             var qrImage = document.getElementById("qrcode").getElementsByTagName('img')[0];
+            alert(qrImage)
             qrImage.onload = function () {
                 openModal();
                 alert("open")

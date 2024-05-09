@@ -27,7 +27,7 @@
                 <i class="fa fa-share"></i>
             </button>
             <div class="options">
-                <button id="whatsappBtn" onclick="shareBtn1()">Share</button>
+                <button id="whatsappBtn" onclick="shareOnClick()">Share</button>
                 <button id="vcfBtn" onclick="downloadVCF()">Save Contact</button>
                 <button id="qrCodeBtn" onclick="generateQRCode()">QR</button>
             </div>
@@ -689,7 +689,7 @@
             <div id="qrcode"></div>
             <div class="d-flex justify-space-around" style="padding-bottom: 15px;">
                 <button class="btn-buy-now" id="saveBtn">Save</button>
-                <button class="btn-buy-now" id="shareBtn">Share</button>
+                <button class="btn-buy-now" onclick="shareOnClick()" id="shareBtn">Share</button>
                 <button class="btn-buy-now" onclick="closeModal()">Close</button>
             </div>
         </div>
@@ -714,70 +714,6 @@
             cursor: pointer;
         }
     </style>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("shareBtn").addEventListener("click", shareOnClick);
-        });
-        document.addEventListener("DOMContentLoaded", function () {
-            document.getElementById("shareBtn1").addEventListener("click", shareOnClick);
-        });
-
-        function shareOnClick() {
-            if (isMobile()) {
-                shareMobile();
-            } else {
-                whatsappbtn();
-            }
-        }
-
-
-        function isMobile() {
-            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        }
-        function shareMobile() {
-    if (navigator.share) {
-        var qrImage = document.getElementById("qrcode").getElementsByTagName('img')[0];
-
-        if (qrImage) {
-            if (qrImage.complete) {
-                shareWithQRImage(qrImage.src);
-            } else {
-                qrImage.addEventListener('load', function () {
-                    shareWithQRImage(qrImage.src);
-                });
-            }
-        } else {
-            // If QR code image is not available
-            shareWithoutQRImage();
-        }
-    } else {
-        alert('Share functionality is not supported on your device.');
-    }
-}
-
-function shareWithQRImage(imageSrc) {
-    navigator.share({
-        title: 'KritiKala',
-        text: 'Kritikala',
-        url: window.location.href,
-        files: [imageSrc]
-    })
-    .then(() => console.log('Successful share'))
-    .catch((error) => console.log('Error sharing', error));
-}
-
-function shareWithoutQRImage() {
-    navigator.share({
-        title: 'KritiKala',
-        text: 'Kritikala',
-        url: window.location.href
-    })
-    .then(() => console.log('Successful share'))
-    .catch((error) => console.log('Error sharing', error));
-}
-
-
-    </script>
 
 
     <!-- Bootstrap Script -->
@@ -846,7 +782,6 @@ function shareWithoutQRImage() {
     <script src="https://cdn.jsdelivr.net/npm/qrcode@latest"></script>
     <script>
         function openModal() {
-            alert("now open")
             var modal = document.getElementById("myModal");
             modal.style.display = "block";
         }
@@ -855,7 +790,8 @@ function shareWithoutQRImage() {
             var modal = document.getElementById("myModal");
             modal.style.display = "none";
         }
-function generateQRCode() {
+
+        function generateQRCode() {
     alert("Work");
 
     var currentURL = window.location.href;
@@ -870,6 +806,7 @@ function generateQRCode() {
     // Call openModal directly after generating QR code
     openModal();
 }
+
 
         // Attach click event to Save Image button
         document.getElementById("saveBtn").addEventListener("click", function () {
@@ -910,6 +847,64 @@ function generateQRCode() {
             var whatsappURL = 'https://wa.me/?phone=7412846037&text=' + encodedMessage;
             window.open(whatsappURL, "_blank");
         }
+    </script>
+    <script>
+
+        function shareOnClick() {
+            if (isMobile()) {
+                shareMobile();
+            } else {
+                whatsappbtn();
+            }
+        }
+
+
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        function shareMobile() {
+    if (navigator.share) {
+        var qrImage = document.getElementById("qrcode").getElementsByTagName('img')[0];
+
+        if (qrImage) {
+            if (qrImage.complete) {
+                shareWithQRImage(qrImage.src);
+            } else {
+                qrImage.addEventListener('load', function () {
+                    shareWithQRImage(qrImage.src);
+                });
+            }
+        } else {
+            shareWithoutQRImage();
+        }
+    } else {
+        alert('Share functionality is not supported on your device.');
+    }
+}
+
+function shareWithQRImage(imageSrc) {
+    navigator.share({
+        title: 'KritiKala',
+        text: 'Kritikala',
+        url: window.location.href,
+        files: [imageSrc]
+    })
+    .then(() => console.log('Successful share'))
+    .catch((error) => console.log('Error sharing', error));
+}
+
+function shareWithoutQRImage() {
+    navigator.share({
+        title: 'KritiKala',
+        text: 'Kritikala',
+        url: window.location.href
+    })
+    .then(() => console.log('Successful share'))
+    .catch((error) => console.log('Error sharing', error));
+}
+
+
     </script>
 </body>
 

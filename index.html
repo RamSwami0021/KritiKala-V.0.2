@@ -844,6 +844,7 @@
         }
 
         function generateQRCode() {
+            alert("work")
             var currentURL = window.location.href;
             var qrcode = new QRCode("qrcode");
             qrcode.makeCode(currentURL);

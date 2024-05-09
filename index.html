@@ -734,36 +734,48 @@
         function isMobile() {
             return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         }
-
         function shareMobile() {
-            if (navigator.share) {
-                var qrImage = document.getElementById("qrcode").getElementsByTagName('img')[0];
+    if (navigator.share) {
+        var qrImage = document.getElementById("qrcode").getElementsByTagName('img')[0];
 
-                if (qrImage) {
-                    qrImage.addEventListener('load', function () {
-                        navigator.share({
-                            title: 'KritiKala',
-                            text: 'Kritikala',
-                            url: window.location.href,
-                            files: [qrImage.src]
-                        })
-                            .then(() => console.log('Successful share'))
-                            .catch((error) => console.log('Error sharing', error));
-                    });
-                } else {
-                    // If QR code image is not available
-                    navigator.share({
-                        title: 'KritiKala',
-                        text: 'Kritikala',
-                        url: window.location.href
-                    })
-                        .then(() => console.log('Successful share'))
-                        .catch((error) => console.log('Error sharing', error));
-                }
+        if (qrImage) {
+            if (qrImage.complete) {
+                shareWithQRImage(qrImage.src);
             } else {
-                alert('Share functionality is not supported on your device.');
+                qrImage.addEventListener('load', function () {
+                    shareWithQRImage(qrImage.src);
+                });
             }
+        } else {
+            // If QR code image is not available
+            shareWithoutQRImage();
         }
+    } else {
+        alert('Share functionality is not supported on your device.');
+    }
+}
+
+function shareWithQRImage(imageSrc) {
+    navigator.share({
+        title: 'KritiKala',
+        text: 'Kritikala',
+        url: window.location.href,
+        files: [imageSrc]
+    })
+    .then(() => console.log('Successful share'))
+    .catch((error) => console.log('Error sharing', error));
+}
+
+function shareWithoutQRImage() {
+    navigator.share({
+        title: 'KritiKala',
+        text: 'Kritikala',
+        url: window.location.href
+    })
+    .then(() => console.log('Successful share'))
+    .catch((error) => console.log('Error sharing', error));
+}
+
 
     </script>
 

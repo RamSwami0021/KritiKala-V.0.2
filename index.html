@@ -867,15 +867,17 @@
             if (navigator.share) {
                 var qrImage = document.getElementById("qrcode").getElementsByTagName('img')[0];
 
-                if (qrImage) {
-                    if (qrImage.complete) {
-                        shareWithQRImage(qrImage.src);
-                    } else {
-                        shareWithQRImage(qrImage.src);
-                    }
-                } else {
+                // if (qrImage) {
+                //     if (qrImage.complete) {
+                //         shareWithQRImage(qrImage.src);
+                //     } else {
+                //         qrImage.addEventListener('load', function () {
+                //             shareWithQRImage(qrImage.src);
+                //         });
+                //     }
+                // } else {
                     shareWithoutQRImage();
-                }
+                // }
             } else {
                 alert('Share functionality is not supported on your device.');
             }

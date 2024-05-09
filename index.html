@@ -689,7 +689,7 @@
             <div id="qrcode"></div>
             <div class="d-flex justify-space-around" style="padding-bottom: 15px;">
                 <button class="btn-buy-now" id="saveBtn">Save</button>
-                <button class="btn-buy-now" onclick="shareOnClick()" id="shareBtn">Share</button>
+                <button class="btn-buy-now" onclick="shareOnClick()">Share</button>
                 <button class="btn-buy-now" onclick="closeModal()">Close</button>
             </div>
         </div>
@@ -792,7 +792,6 @@
         }
 
         function generateQRCode() {
-            alert("Work");
 
             var currentURL = window.location.href;
             console.log("Current URL: " + currentURL);
@@ -867,17 +866,17 @@
             if (navigator.share) {
                 var qrImage = document.getElementById("qrcode").getElementsByTagName('img')[0];
 
-                // if (qrImage) {
-                //     if (qrImage.complete) {
-                //         shareWithQRImage(qrImage.src);
-                //     } else {
-                //         qrImage.addEventListener('load', function () {
-                //             shareWithQRImage(qrImage.src);
-                //         });
-                //     }
-                // } else {
+                if (qrImage) {
+                    if (qrImage.complete) {
+                        shareWithQRImage(qrImage.src);
+                    } else {
+                        qrImage.addEventListener('load', function () {
+                            shareWithQRImage(qrImage.src);
+                        });
+                    }
+                } else {
                     shareWithoutQRImage();
-                // }
+                }
             } else {
                 alert('Share functionality is not supported on your device.');
             }

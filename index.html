@@ -844,27 +844,27 @@
             modal.style.display = "none";
         }
 function generateQRCode() {
-        console.log("Function started");
+        alert("Function started");
     alert("Work"); // Check if this alert appears
 
     var currentURL = window.location.href;
-    console.log("Current URL: " + currentURL); // Log current URL
+    alert("Current URL: " + currentURL); // Log current URL
 
     var qrcode = new QRCode("qrcode");
-    console.log("QRCode instance created"); // Check if this log appears
+    alert("QRCode instance created"); // Check if this log appears
 
     qrcode.makeCode(currentURL);
-    console.log("QRCode generated"); // Check if this log appears
+    alert("QRCode generated"); // Check if this log appears
 
     var qrImage = document.getElementById("qrcode").getElementsByTagName('img')[0];
-    console.log("QRCode image found"); // Check if this log appears
+    alert("QRCode image found"); // Check if this log appears
 
     qrImage.onload = function () {
-        console.log("QRCode image loaded"); // Check if this log appears
+        alert("QRCode image loaded"); // Check if this log appears
         openModal(); // Check if this function is called
     };
 
-    console.log("Function finished");
+    alert("Function finished");
 }
         // Attach click event to Save Image button
         document.getElementById("saveBtn").addEventListener("click", function () {

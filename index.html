@@ -27,9 +27,9 @@
                 <i class="fa fa-share"></i>
             </button>
             <div class="options">
-                <button id="whatsappBtn" onclick="whatsappbtn()">WhatsApp</button>
-                <button id="vcfBtn" onclick="downloadVCF()">Download VCF</button>
-                <button id="qrCodeBtn" onclick="generateQRCode()">QR Code</button>
+                <button id="whatsappBtn" onclick="shareBtn1()">Share</button>
+                <button id="vcfBtn" onclick="downloadVCF()">Save Contact</button>
+                <button id="qrCodeBtn" onclick="generateQRCode()">QR</button>
             </div>
         </div>
         <style>
@@ -571,30 +571,30 @@
                     <div class="col-md-8">
                         <div class="form h-100">
                             <h3>Send us a message</h3>
-                            <form class="mb-5" method="post" id="contactForm" name="contactForm">
+                            <form class="mb-5" onsubmit="submitForm(); return false;">
                                 <div class="row">
                                     <div class="col-md-6 form-group mb-5">
-                                        <label for="" class="col-form-label">Name *</label>
+                                        <label for="name" class="col-form-label">Name *</label>
                                         <input type="text" class="form-control" name="name" id="name"
-                                            placeholder="Your name">
+                                            placeholder="Your name" required>
                                     </div>
                                     <div class="col-md-6 form-group mb-5">
-                                        <label for="" class="col-form-label">Email *</label>
-                                        <input type="text" class="form-control" name="email" id="email"
-                                            placeholder="Your email">
+                                        <label for="email" class="col-form-label">Email *</label>
+                                        <input type="email" class="form-control" name="email" id="email"
+                                            placeholder="Your email" required>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-6 form-group mb-5">
-                                        <label for="" class="col-form-label">Phone</label>
+                                        <label for="phone" class="col-form-label">Phone</label>
                                         <input type="text" class="form-control" name="phone" id="phone"
-                                            placeholder="Phone #">
+                                            placeholder="Phone #" required>
                                     </div>
                                     <div class="col-md-6 form-group mb-5">
-                                        <label for="" class="col-form-label">Subject</label>
+                                        <label for="company" class="col-form-label">Subject</label>
                                         <input type="text" class="form-control" name="company" id="company"
-                                            placeholder="Subject  ">
+                                            placeholder="Subject" required>
                                     </div>
                                 </div>
 
@@ -602,7 +602,7 @@
                                     <div class="col-md-12 form-group mb-5">
                                         <label for="message" class="col-form-label">Message *</label>
                                         <textarea class="form-control" name="message" id="message" cols="30" rows="4"
-                                            placeholder="Write your message"></textarea>
+                                            placeholder="Write your message" required></textarea>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -618,7 +618,6 @@
                             <div id="form-message-success">
                                 Your message was sent, thank you!
                             </div>
-
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -674,38 +673,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="row" style="display: flex; justify-content: space-between; margin-top: -10%;">
-                <div class="col-12 col-md-6 col-lg-3">
-                    <h2 class="fw-bold">Khojo Right Now</h2>
-                    <h6 class="text-secondary">"Where Tradition Meets Innovation, Every Creation a Testament to
-                        Handcrafted Artistry"</h6>
-
-                </div>
-                <div class="col-12 col-md-6 col-lg-3">
-                    <h3 class="">Quick Links</h3>
-                    <ul>
-                        <li>Home</li>
-                        <li>Product</li>
-                        <li>Service</li>
-                        <li>About</li>
-                        <li>Contact</li>
-                    </ul>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3">
-                    <h3 class="">Contact Info</h3>
-                    <h6>Khojo Right Now</h6>
-                    <h6>+91 7412846037</h6>
-                    <h6>hello@khojo.com</h6>
-                </div>
-                <div class="col-12 col-md-6 col-lg-3">
-                    <h3 class="">Social Info</h3>
-                    <ul>
-                        <li>Instagram</li>
-                        <li>Facebook</li>
-                        <li>Youtube</li>
-                    </ul>
-                </div>
-            </div> -->
         </section>
     </main>
     <!-- End Main -->
@@ -715,6 +682,90 @@
         <small>©2024. Khojo. All rights reserved.</small>
     </footer>
     <!-- End Footer -->
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h3>Download Your QR Code</h3>
+            <div id="qrcode"></div>
+            <div class="d-flex justify-space-around" style="padding-bottom: 15px;">
+                <button class="btn-buy-now" id="saveBtn">Save</button>
+                <button class="btn-buy-now" id="shareBtn">Share</button>
+                <button class="btn-buy-now" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+    <style>
+        .modal-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .close {
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("shareBtn").addEventListener("click", shareOnClick);
+        });
+        document.addEventListener("DOMContentLoaded", function () {
+            document.getElementById("shareBtn1").addEventListener("click", shareOnClick);
+        });
+
+        function shareOnClick() {
+            if (isMobile()) {
+                shareMobile();
+            } else {
+                whatsappbtn();
+            }
+        }
+
+
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        function shareMobile() {
+            if (navigator.share) {
+                var qrImage = document.getElementById("qrcode").getElementsByTagName('img')[0];
+
+                if (qrImage) {
+                    qrImage.addEventListener('load', function () {
+                        navigator.share({
+                            title: 'KritiKala',
+                            text: 'Kritikala',
+                            url: window.location.href,
+                            files: [qrImage.src]
+                        })
+                            .then(() => console.log('Successful share'))
+                            .catch((error) => console.log('Error sharing', error));
+                    });
+                } else {
+                    // If QR code image is not available
+                    navigator.share({
+                        title: 'KritiKala',
+                        text: 'Kritikala',
+                        url: window.location.href
+                    })
+                        .then(() => console.log('Successful share'))
+                        .catch((error) => console.log('Error sharing', error));
+                }
+            } else {
+                alert('Share functionality is not supported on your device.');
+            }
+        }
+
+    </script>
 
 
     <!-- Bootstrap Script -->
@@ -782,22 +833,66 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/qrcode@latest"></script>
     <script>
+        function openModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            var modal = document.getElementById("myModal");
+            modal.style.display = "none";
+        }
+
         function generateQRCode() {
-    var currentURL = window.location.href;
-    var qrcode = new QRCode("qrcode");
-    qrcode.makeCode(currentURL);
+            var currentURL = window.location.href;
+            var qrcode = new QRCode("qrcode");
+            qrcode.makeCode(currentURL);
 
-    var qrImage = document.getElementById("qrcode").getElementsByTagName('img')[0];
-    qrImage.onload = function() {
-        var downloadLink = document.createElement('a');
-        downloadLink.href = qrImage.src;
-        downloadLink.download = 'qrcode.png';
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-    };
-}
+            var qrImage = document.getElementById("qrcode").getElementsByTagName('img')[0];
+            qrImage.onload = function () {
+                openModal();
+            };
+        }
 
+        // Attach click event to Save Image button
+        document.getElementById("saveBtn").addEventListener("click", function () {
+            var qrImage = document.getElementById("qrcode").getElementsByTagName('img')[0];
+            var downloadLink = document.createElement('a');
+            downloadLink.href = qrImage.src;
+            downloadLink.download = 'qrcode.png';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        });
+
+        // Close modal when clicking outside modal content
+        window.onclick = function (event) {
+            var modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+    </script>
+    <script>
+        function submitForm() {
+            // Retrieve form data
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var phone = document.getElementById('phone').value;
+            var company = document.getElementById('company').value;
+            var message = document.getElementById('message').value;
+
+            var whatsappMessage = "Hi, I'm interested in your services. Here are my details:\n\n";
+            whatsappMessage += "Name: " + name + "\n";
+            whatsappMessage += "Email: " + email + "\n";
+            whatsappMessage += "Phone: " + phone + "\n";
+            whatsappMessage += "Subject: " + company + "\n";
+            whatsappMessage += "Message: " + message;
+            var encodedMessage = encodeURIComponent(whatsappMessage);
+            var whatsappURL = 'https://wa.me/?phone=7412846037&text=' + encodedMessage;
+            window.open(whatsappURL, "_blank");
+        }
     </script>
 </body>
 

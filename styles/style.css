@@ -1,3 +1,6 @@
+body{
+    background-color: #FEEAE9;
+}
 .panda-bg-info {
     background-color: #FEEAE9;
 }
@@ -8,19 +11,21 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
-    font-weight: 600;
+    /* font-weight: 600; */
+    font-size: small;
     text-transform: uppercase;
-    margin-top: 16px;
+    /* margin-top: 16px; */
     background-image: linear-gradient(to bottom, #FF589B 0%, #FF136F 100%);
     color: #fff;
     border: none;
     border-radius: 6px;
-    padding: 14px 20px;
+    /* padding: 14px 20px; */
+    padding: 5px 10px;
 }
 
 .price {
     color: #FF136F;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 
 .watch {
@@ -36,8 +41,8 @@
 }
 
 .all-categories {
-    background-color: #F4F4F4;
-    padding: 10px 0 20px;
+    background-color: #fff;
+    padding: 10px 10px;
 }
 
 #shoes {

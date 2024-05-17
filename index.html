@@ -10,7 +10,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-        <link rel="shortcut icon" href="images/khojo-logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/khojo-logo.png" type="image/x-icon">
 
 
     <!-- FontAwesome -->
@@ -26,55 +26,117 @@
     <header>
         <div class="fixed-button">
             <button id="openOptions">
-                <i class="fa fa-share"></i>
+                <img src="/images/khojo-logo.png" style="width: 25%;" alt="">
             </button>
             <div class="options">
-                <button onclick="shareOnClick()">Share</button>
-                <button id="vcfBtn" onclick="downloadVCF()">Save Contact</button>
-                <button id="qrCodeBtn" onclick="generateQRCode()">QR</button>
+                <div class="opt-btn" onclick="shareOnClick()">
+                    <h4>Share my store</h4>
+                </div>
+                <div class="opt-btn" id="vcfBtn" onclick="downloadVCF()">
+                    <h4>Save my store</h4>
+                </div>
+                <div class="opt-btn" id="qrCodeBtn" onclick="generateQRCode()">
+                    <h4>My store QR</h4>
+                </div>
             </div>
         </div>
         <style>
+            .opt-btn {
+                margin-bottom: 4px;
+                display: flex;
+                -webkit-box-align: center;
+                align-items: center;
+                width: 100%;
+                -webkit-box-pack: justify;
+                justify-content: space-between;
+                cursor: pointer;
+            }
+
+            .opt-btn h4 {
+                color: #fff;
+            }
+
             .fixed-button {
                 position: fixed;
-                bottom: 20px;
-                right: 20px;
+                bottom: 40px;
+                right: -60px;
                 z-index: 10;
             }
 
             .fixed-button button {
-                padding: 10px 20px;
-                background-color: #FF136F;
+                padding: 0px;
+                background-color: transparent;
                 color: white;
                 border: none;
                 cursor: pointer;
-                border-radius: 50%;
+                z-index: 2;
+                position: relative;
             }
 
             .options {
                 display: none;
                 position: absolute;
-                background-color: #f9f9f9;
-                min-width: 160px;
-                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
                 z-index: 1;
-                top: -175px;
-                left: -100px;
+                right: 48%;
+                width: 255px;
+                top: -196%;
+                padding: 20px 32px;
+                border-radius: 20px;
+                background: #CF4258;
+                backface-visibility: hidden;
+                transform: translateZ(0px);
+                will-change: transform, opacity;
+                transform-origin: center bottom;
+                opacity: 1;
+                animation: dMLXAX 250ms ease-out 0s 1 normal none running;
             }
 
-            .options button {
-                display: block;
-                width: 100%;
-                padding: 10px 20px;
-                text-align: left;
-                border: none;
-                border-radius: 0;
-                background-color: #FF136F;
-                cursor: pointer;
+            @keyframes dMLXAX {
+                0% {
+                    transform: scale(0);
+                }
+
+                100% {
+                    transform: scale(1);
+                }
             }
+
 
             .options button:hover {
                 background-color: #ddd;
+            }
+
+            .navbar {
+                position: fixed;
+                display: flex;
+                justify-content: space-between;
+                z-index: 100;
+                background: white;
+                width: 100%;
+            }
+
+            #carouselExampleIndicators {
+                padding-top: 5%;
+            }
+
+            @media (max-width: 768px) {
+                .options {
+                    right: 48%;
+                    width: 300px;
+                    top: -190%;
+                }
+
+                #carouselExampleIndicators {
+                    padding-top: 0%;
+                }
+
+                .header-pera {
+                    line-height: normal;
+                }
+
+                .card-body {
+                    padding: 0%;
+                }
             }
         </style>
         <script>
@@ -86,7 +148,13 @@
                 var qrCodeBtn = document.getElementById('qrCodeBtn');
 
                 openBtn.addEventListener('click', function () {
-                    optionsDiv.style.display = (optionsDiv.style.display === 'block') ? 'none' : 'block';
+                    if (optionsDiv.style.display === 'block') {
+                        setTimeout(function () {
+                            optionsDiv.style.display = 'none';
+                        }, 300);
+                    } else {
+                        optionsDiv.style.display = 'block';
+                    }
                 });
 
                 whatsappBtn.addEventListener('click', function () {
@@ -98,12 +166,19 @@
                 });
 
                 qrCodeBtn.addEventListener('click', function () {
+                    // Add functionality for generating QR code here
                 });
             });
-
+            document.addEventListener('click', function (event) {
+                console.log("hello");
+                if (optionsDiv.style.display === 'block') {
+                    optionsDiv.style.display = 'none';
+                    console.log("hi");
+                }
+            });
         </script>
         <!-- NavBar Added -->
-        <nav class="navbar navbar-expand-lg py-4">
+        <nav class="navbar navbar-expand-lg">
             <div class="container">
                 <a class="navbar-brand" href="#">
                     <h1>KritiKala</h1>
@@ -148,12 +223,21 @@
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
                         aria-label="Slide 3"></button> -->
                 </div>
-                <div class="carousel-inner rounded-3">
+                <div class="carousel-inner">
                     <div class="carousel-item active">
                         <div class="row panda-bg-info p-5 d-flex align-items-center">
                             <div class="col-lg-7 ps order-2 order-md-2 order-lg-2">
                                 <h1 class="fw-bold mb-3">Decorative Tea Pot</h1>
-                                <p class="mb-4">Welcome to Kritikala, a venture driven by rural artisans passionate about crafting exquisite handmade items from clay and wood. Rooted in tradition and craftsmanship, our artisans imbue each creation with love and dedication, showcasing the rich cultural heritage of India. From intricately designed pottery to beautifully carved wooden artifacts, every piece tells a story of skill and artistry. By supporting Kritikala, you not only acquire unique handcrafted treasures but also empower rural artisans to sustain their livelihoods and preserve their ancestral craft traditions. Explore our collection and become part of our journey to celebrate craftsmanship and community.</p>
+                                <p class="mb-4 header-pera">Welcome to Kritikala, a venture driven by rural artisans
+                                    passionate
+                                    about crafting exquisite handmade items from clay and wood. Rooted in tradition and
+                                    craftsmanship, our artisans imbue each creation with love and dedication, showcasing
+                                    the rich cultural heritage of India. From intricately designed pottery to
+                                    beautifully carved wooden artifacts, every piece tells a story of skill and
+                                    artistry. By supporting Kritikala, you not only acquire unique handcrafted treasures
+                                    but also empower rural artisans to sustain their livelihoods and preserve their
+                                    ancestral craft traditions. Explore our collection and become part of our journey to
+                                    celebrate craftsmanship and community.</p>
                                 <ul class="links list-unstyled d-flex">
                                     <li class="d-flex">
                                         <span class="fa fa-facebook mx-2 my-2"></span>
@@ -220,66 +304,39 @@
 
     <!-- Start Main -->
     <main>
-        <!-- Categories -->
-        <!-- <div class="container my-5">
-            <h2 class="fw-semibold mb-3">Handicraft Categories</h2>
-            <div class="row g-4">
-                <div class="col-sm-12 col-md-6 col-lg-4">
-                    <div
-                        class="p-3 border bg-primary text-light d-flex align-items-center justify-content-around rounded-3 watch">
-                        <h2 class="fw-semibold">Pottery</h2>
-                        <img class="w-25" src="images/2.png" alt="">
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4">
-                    <div
-                        class="p-3 border bg-success text-light d-flex align-items-center justify-content-around rounded-3 bag">
-                        <h2 class="fw-semibold">Metal Crafts</h2>
-                        <img class="w-25" src="images/4.png" alt="">
-                    </div>
-                </div>
-                <div class="col-sm-12 col-md-6 col-lg-4">
-                    <div
-                        class="p-3 border bg-warning text-light d-flex align-items-center justify-content-around rounded-3 shoes">
-                        <h2 class="fw-semibold">Woodcraft</h2>
-                        <img class="w-25" src="images/6.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-        <!-- Category Shoes -->
         <section class="all-categories" id="product">
             <div class="container my-5">
                 <div class="row g-4">
-                    <div class="col-sm-12 col-md-6 col-lg-4" style="margin: auto;">
-                        <div
-                            class="p-3 border bg-primary text-light d-flex align-items-center justify-content-around rounded-3 watch">
-                            <h2 class="fw-semibold">Products</h2>
-                            <!-- <img class="w-25" src="images/2.png" alt=""> -->
+                    <div class="col-sm-12 col-md-12 col-lg-12" style="margin: auto;">
+                        <div class="text-light d-flex align-items-end justify-content-between">
+                            <h1 class="fw-semibold">Products</h1>
+                            <h6 style="border-bottom: 1px solid black;">View All</h6>
                         </div>
                     </div>
                 </div>
             </div>
-            <section id="shoes" class="container">
+        </section>
+        <section class="" id="product">
+            <section class="container py-5">
                 <div class="d-flex justify-content-between align-items-center">
                     <h2 class="fw-semibold mb-3">Pottery</h2>
                 </div>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
                     <div class="col">
                         <div class="card border-0 rounded-3 h-100">
                             <img src="images/1.png" class="card-img-top" alt="...">
                             <div class="card-body text-center">
-                                <h5 class="card-title fw-semibold">Decorative Tea Pot</h5>
-                                <p class="card-text mt-4">Handcrafted leather boots designed for durability and style.
-                                    Each pair is meticulously crafted by skilled artisans.</p>
-                                <h5 class="price fw-semibold">₹120</h5>
+                                <h6 class="card-title fw-semibold">Decorative Tea Pot</h6>
+                                <!-- <p class="card-text mt-4">Handcrafted leather boots designed for durability and style.
+                                    Each pair is meticulously crafted by skilled artisans.</p> -->
+                                <h6 class="price fw-semibold">₹120</h6>
                             </div>
                             <div class="mb-4 d-flex justify-content-around">
-                                <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
-                                        class="fa fa-whatsapp"></i>Whatsapp</button>
+                                <button type="button" class="btn-buy-now" onclick="whatsapp()">Shop Now</button>
+                                <!-- <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
+                                        class="fa fa-whatsapp"></i></button>
                                 <button type="button" class="btn-buy-now" onclick="call()"><i
-                                        class="fa fa-phone"></i>Call</button>
+                                        class="fa fa-phone"></i></button> -->
                             </div>
                         </div>
                     </div>
@@ -287,16 +344,17 @@
                         <div class="card border-0 rounded-3 h-100">
                             <img src="images/2.png" class="card-img-top" alt="...">
                             <div class="card-body text-center">
-                                <h5 class="card-title fw-semibold">Decorative Vase</h5>
-                                <p class="card-text mt-4">Comfortable and stylish handwoven sandals, perfect for casual
-                                    wear. Made with natural materials by skilled artisans.</p>
-                                <h5 class="price fw-semibold">₹320</h5>
+                                <h6 class="card-title fw-semibold">Decorative Flower Pot</h6>
+                                <!-- <p class="card-text mt-4">Handcrafted leather boots designed for durability and style.
+                                    Each pair is meticulously crafted by skilled artisans.</p> -->
+                                <h6 class="price fw-semibold">₹120</h6>
                             </div>
                             <div class="mb-4 d-flex justify-content-around">
-                                <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
-                                        class="fa fa-whatsapp"></i>Whatsapp</button>
+                                <!-- <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
+                                        class="fa fa-whatsapp"></i></button>
                                 <button type="button" class="btn-buy-now" onclick="call()"><i
-                                        class="fa fa-phone"></i>Call</button>
+                                        class="fa fa-phone"></i></button> -->
+                                <button type="button" class="btn-buy-now" onclick="whatsapp()">Shop Now</button>
                             </div>
                         </div>
                     </div>
@@ -304,74 +362,35 @@
                         <div class="card border-0 rounded-3 h-100">
                             <img src="images/3.png" class="card-img-top" alt="...">
                             <div class="card-body text-center">
-                                <h5 class="card-title fw-semibold">Decorative Dolls</h5>
-                                <p class="card-text mt-4">Classic handcrafted moccasins crafted with precision and care.
-                                    Made from premium materials for superior comfort and durability.</p>
-                                <h5 class="price fw-semibold">₹350</h5>
+                                <h6 class="card-title fw-semibold">Wooven Jute Tray</h6>
+                                <!-- <p class="card-text mt-4">Handcrafted leather boots designed for durability and style.
+                                    Each pair is meticulously crafted by skilled artisans.</p> -->
+                                <h6 class="price fw-semibold">₹120</h6>
                             </div>
                             <div class="mb-4 d-flex justify-content-around">
-                                <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
-                                        class="fa fa-whatsapp"></i>Whatsapp</button>
+                                <!-- <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
+                                        class="fa fa-whatsapp"></i></button>
                                 <button type="button" class="btn-buy-now" onclick="call()"><i
-                                        class="fa fa-phone"></i>Call</button>
+                                        class="fa fa-phone"></i></button> -->
+                                <button type="button" class="btn-buy-now" onclick="whatsapp()">Shop Now</button>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
-            <section id="backpack" class="container">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="fw-semibold mb-3">Woodcraft</h2>
-                </div>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
                     <div class="col">
                         <div class="card border-0 rounded-3 h-100">
                             <img src="images/4.png" class="card-img-top" alt="...">
                             <div class="card-body text-center">
-                                <h5 class="card-title fw-semibold">Bamboo Tray</h5>
-                                <p class="card-text mt-4">Handcrafted woven backpack made from natural fibers, perfect
-                                    for eco-conscious travelers. Designed for both style and functionality.</p>
-                                <h5 class="price fw-semibold">₹120</h5>
+                                <h6 class="card-title fw-semibold">Decorative Dolls</h6>
+                                <!-- <p class="card-text mt-4">Handcrafted leather boots designed for durability and style.
+                                    Each pair is meticulously crafted by skilled artisans.</p> -->
+                                <h6 class="price fw-semibold">₹120</h6>
                             </div>
                             <div class="mb-4 d-flex justify-content-around">
-                                <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
-                                        class="fa fa-whatsapp"></i>Whatsapp</button>
+                                <!-- <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
+                                        class="fa fa-whatsapp"></i></button>
                                 <button type="button" class="btn-buy-now" onclick="call()"><i
-                                        class="fa fa-phone"></i>Call</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card border-0 rounded-3 h-100">
-                            <img src="images/5.png" class="card-img-top" alt="...">
-                            <div class="card-body text-center">
-                                <h5 class="card-title fw-semibold">Handcrafted Leather Backpack</h5>
-                                <p class="card-text mt-4">Luxurious handcrafted leather backpack, perfect for everyday
-                                    use or travel. Each piece is unique and made with attention to detail.</p>
-                                <h5 class="price fw-semibold">₹320</h5>
-                            </div>
-                            <div class="mb-4 d-flex justify-content-around">
-                                <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
-                                        class="fa fa-whatsapp"></i>Whatsapp</button>
-                                <button type="button" class="btn-buy-now" onclick="call()"><i
-                                        class="fa fa-phone"></i>Call</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card border-0 rounded-3 h-100">
-                            <img src="images/6.png" class="card-img-top" alt="...">
-                            <div class="card-body text-center">
-                                <h5 class="card-title fw-semibold">Terracotta Craft</h5>
-                                <p class="card-text mt-4">Durable and stylish artisanal canvas backpack, perfect for
-                                    urban adventurers. Handcrafted with care for quality and longevity.</p>
-                                <h5 class="price fw-semibold">₹169</h5>
-                            </div>
-                            <div class="mb-4 d-flex justify-content-around">
-                                <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
-                                        class="fa fa-whatsapp"></i>Whatsapp</button>
-                                <button type="button" class="btn-buy-now" onclick="call()"><i
-                                        class="fa fa-phone"></i>Call</button>
+                                        class="fa fa-phone"></i></button> -->
+                                <button type="button" class="btn-buy-now" onclick="whatsapp()">Shop Now</button>
                             </div>
                         </div>
                     </div>
@@ -381,49 +400,36 @@
         <section class="all-categories" id="service">
             <div class="container my-5">
                 <div class="row g-4">
-                    <div class="col-sm-12 col-md-6 col-lg-4" style="margin: auto;">
-                        <div
-                            class="p-3 border bg-primary text-light d-flex align-items-center justify-content-around rounded-3 watch">
-                            <h2 class="fw-semibold">Services</h2>
-                            <!-- <img class="w-25" src="images/2.png" alt=""> -->
+                    <div class="col-sm-12 col-md-12 col-lg-12" style="margin: auto;">
+                        <div class="text-light d-flex align-items-end justify-content-between">
+                            <h1 class="fw-semibold">Services</h1>
+                            <h6 style="border-bottom: 1px solid black;">View All</h6>
                         </div>
                     </div>
                 </div>
             </div>
-            <section id="shoes" class="container">
+        </section>
+        <section class="" id="product">
+            <section class="container py-5">
                 <div class="d-flex justify-content-between align-items-center">
                     <h2 class="fw-semibold mb-3">Pottery</h2>
                 </div>
-                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                    <div class="col">
-                        <div class="card border-0 rounded-3 h-100">
-                            <img src="images/2.jpg" class="card-img-top" alt="...">
-                            <div class="card-body text-center">
-                                <h5 class="card-title fw-semibold">Interested In Learning To Craft Beautiful Clay Pots?
-                                    Join Our Pottery Making Class!</h5>
-                                <h5 class="price fw-semibold">₹120</h5>
-                            </div>
-                            <div class="mb-4 d-flex justify-content-around">
-                                <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
-                                        class="fa fa-whatsapp"></i>Whatsapp</button>
-                                <button type="button" class="btn-buy-now" onclick="call()"><i
-                                        class="fa fa-phone"></i>Call</button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
                     <div class="col">
                         <div class="card border-0 rounded-3 h-100">
                             <img src="images/1.jpg" class="card-img-top" alt="...">
                             <div class="card-body text-center">
-                                <h5 class="card-title fw-semibold">Ready To Unleash Your Creativity? Sign Up For Our Art
-                                    Painting Workshop!</h5>
-                                <h5 class="price fw-semibold">₹320</h5>
+                                <h6 class="card-title fw-semibold">Ready To Unleash Your Creativity? Sign Up For Our Art of macrame Workshop!</h6>
+                                <!-- <p class="card-text mt-4">Handcrafted leather boots designed for durability and style.
+                                    Each pair is meticulously crafted by skilled artisans.</p> -->
+                                <h6 class="price fw-semibold">₹120</h6>
                             </div>
                             <div class="mb-4 d-flex justify-content-around">
-                                <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
-                                        class="fa fa-whatsapp"></i>Whatsapp</button>
+                                <button type="button" class="btn-buy-now" onclick="whatsapp()">Shop Now</button>
+                                <!-- <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
+                                        class="fa fa-whatsapp"></i></button>
                                 <button type="button" class="btn-buy-now" onclick="call()"><i
-                                        class="fa fa-phone"></i>Call</button>
+                                        class="fa fa-phone"></i></button> -->
                             </div>
                         </div>
                     </div>
@@ -431,52 +437,91 @@
                         <div class="card border-0 rounded-3 h-100">
                             <img src="images/product.jpg" class="card-img-top" alt="...">
                             <div class="card-body text-center">
-                                <h5 class="card-title fw-semibold">Interested In Mastering The Art Of Knitting? Enroll
-                                    In Our Knitting Masterclass!</h5>
-                                <h5 class="price fw-semibold">₹350</h5>
+                                <h6 class="card-title fw-semibold">Interested In Mastering The Art Of Knitting? Enroll In Our Knitting Masterclass!
+                                </h6>
+                                <!-- <p class="card-text mt-4">Handcrafted leather boots designed for durability and style.
+                                    Each pair is meticulously crafted by skilled artisans.</p> -->
+                                <h6 class="price fw-semibold">₹120</h6>
                             </div>
                             <div class="mb-4 d-flex justify-content-around">
-                                <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
-                                        class="fa fa-whatsapp"></i>Whatsapp</button>
+                                <!-- <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
+                                        class="fa fa-whatsapp"></i></button>
                                 <button type="button" class="btn-buy-now" onclick="call()"><i
-                                        class="fa fa-phone"></i>Call</button>
+                                        class="fa fa-phone"></i></button> -->
+                                <button type="button" class="btn-buy-now" onclick="whatsapp()">Shop Now</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card border-0 rounded-3 h-100">
+                            <img src="images/3.jpg" class="card-img-top" alt="...">
+                            <div class="card-body text-center">
+                                <h6 class="card-title fw-semibold">Weaving jute Workshop</h6>
+                                <!-- <p class="card-text mt-4">Handcrafted leather boots designed for durability and style.
+                                    Each pair is meticulously crafted by skilled artisans.</p> -->
+                                <h6 class="price fw-semibold">₹120</h6>
+                            </div>
+                            <div class="mb-4 d-flex justify-content-around">
+                                <!-- <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
+                                        class="fa fa-whatsapp"></i></button>
+                                <button type="button" class="btn-buy-now" onclick="call()"><i
+                                        class="fa fa-phone"></i></button> -->
+                                <button type="button" class="btn-buy-now" onclick="whatsapp()">Shop Now</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="card border-0 rounded-3 h-100">
+                            <img src="images/product2.jpg" class="card-img-top" alt="...">
+                            <div class="card-body text-center">
+                                <h6 class="card-title fw-semibold">Interested In Learning To Craft Beautiful Clay Pots? Join Our Pottery Making Class!</h6>
+                                <!-- <p class="card-text mt-4">Handcrafted leather boots designed for durability and style.
+                                    Each pair is meticulously crafted by skilled artisans.</p> -->
+                                <h6 class="price fw-semibold">₹120</h6>
+                            </div>
+                            <div class="mb-4 d-flex justify-content-around">
+                                <!-- <button type="button" class="btn-buy-now" onclick="whatsapp()"><i
+                                        class="fa fa-whatsapp"></i></button>
+                                <button type="button" class="btn-buy-now" onclick="call()"><i
+                                        class="fa fa-phone"></i></button> -->
+                                <button type="button" class="btn-buy-now" onclick="whatsapp()">Shop Now</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
         </section>
-
-
-
-
-        <!-- Subscribe Section -->
-        <section id="subscribe" class="container my-5  rounded-3 align-items-center">
-            <div class="row g-4 my-5" id="gallery">
-                <div class="col-sm-12 col-md-6 col-lg-4" style="margin: auto;">
-                    <div
-                        class="p-3 border bg-primary text-light d-flex align-items-center justify-content-around rounded-3 watch">
-                        <h2 class="fw-semibold">Gallery</h2>
-                        <!-- <img class="w-25" src="images/2.png" alt=""> -->
+        <section class="all-categories" id="gallery">
+            <div class="container my-5">
+                <div class="row g-4">
+                    <div class="col-sm-12 col-md-12 col-lg-12" style="margin: auto;">
+                        <div class="text-light d-flex align-items-end justify-content-between">
+                            <h1 class="fw-semibold">Gallery</h1>
+                            <!-- <h6 style="border-bottom: 1px solid black;">View All</h6> -->
+                            <div class="d-flex justify-content-center mb-4">
+                                <button class="carousel-control-prev position-relative" type="button"
+                                    data-mdb-target="#carouselMultiItemExample" data-mdb-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next position-relative" type="button"
+                                    data-mdb-target="#carouselMultiItemExample" data-mdb-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <!-- Carousel wrapper -->
+        </section>
+
+        <!-- Subscribe Section -->
+        <section id="subscribe" class="container my-5  rounded-3 align-items-center">
             <div id="carouselMultiItemExample" data-mdb-carousel-init class="carousel slide carousel-dark text-center"
                 data-mdb-ride="carousel">
                 <!-- Controls -->
-                <div class="d-flex justify-content-center mb-4">
-                    <button class="carousel-control-prev position-relative" type="button"
-                        data-mdb-target="#carouselMultiItemExample" data-mdb-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next position-relative" type="button"
-                        data-mdb-target="#carouselMultiItemExample" data-mdb-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
+
                 <!-- Inner -->
                 <div class="carousel-inner py-4">
                     <!-- Single item -->

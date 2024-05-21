@@ -259,11 +259,11 @@
                                                     <h6 class="text-muted">Pottery</h6>
                                                     <h6 class="text-black mb-0">Wooven Jute Tray</h6>
                                                 </div>
-                                                <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                                <div class="col-md-4 col-lg-4 col-xl-3 d-flex">
                                                     <button class="btn btn-link px-2" onclick="changeQuantity(-1)">
                                                         <i class="fas fa-minus"></i>
                                                     </button>
-                                                    <input id="quantity" min="0" name="quantity" value="1" type="number" class="form-control form-control-sm" onchange="updateTotal()" />
+                                                    <input id="quantity" min="0" name="quantity" value="1" type="number" class="form-control form-control-lg" onchange="updateTotal()" />
                                                     <button class="btn btn-link px-2" onclick="changeQuantity(1)">
                                                         <i class="fas fa-plus"></i>
                                                     </button>
@@ -271,13 +271,13 @@
                                                 <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                                                     <h6 class="mb-0">₹<span id="item-price">120</span></h6>
                                                 </div>
-                                                <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                                <!-- <div class="col-md-1 col-lg-1 col-xl-1 text-end">
                                                     <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <hr class="my-4">
                                             <div class="pt-5">
-                                                <h6 class="mb-0"><a href="#!" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
+                                                <h6 class="mb-0"><a href="index.html" class="text-body"><i class="fas fa-long-arrow-alt-left me-2"></i>Back to Store</a></h6>
                                             </div>
                                         </div>
                                     </div>
@@ -343,12 +343,16 @@
                                             const phone = document.getElementById('phone').value;
                                             const address = document.getElementById('address').value;
                                             const productName = "Wooven Jute Tray"; 
+                                            const itemPrice = 120;
+                                            const quantity = parseInt(document.getElementById('quantity').value);
+
+
                                 
                                             const totalPrice = quantity * itemPrice;
-                                            const orderMessage = `Coustmer Name: ${name}\n Phone Number: ${phone}\n Address: ${address}\n Order Details:\nProduct: ${productName}\nQuantity: ${quantity}\nTotal Price: $${totalPrice}`;
+                                            const orderMessage = `Coustmer Name: ${name}\n Phone Number: ${phone}\n Address: ${address}\n Order Details:\nProduct: ${productName}\nQuantity:   ${quantity}\nTotal Price: ${totalPrice}`;
                                 
                                             const encodedMessage = encodeURIComponent(orderMessage);
-                                            const whatsappUrl = `https://api.whatsapp.com/send?phone=YOUR_PHONE_NUMBER&text=${encodedMessage}`;
+                                            const whatsappUrl = `https://api.whatsapp.com/send?phone=7412846037&text=${encodedMessage}`;
                                 
                                             window.open(whatsappUrl, '_blank');
                                 
